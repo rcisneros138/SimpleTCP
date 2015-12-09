@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IPHeader.cs" />
+    <Compile Include="TcpHeader.cs" />
     <Compile Include="TestClass.cs" />
     <Compile Include="Translator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
