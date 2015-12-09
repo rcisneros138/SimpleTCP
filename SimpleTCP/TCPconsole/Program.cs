@@ -13,6 +13,8 @@ namespace TCPconsole
         {
             TestClass testClass = new TestClass();
             Translator<object> translator = new Translator<object>(testClass);
+
+            
         }
     }
 }

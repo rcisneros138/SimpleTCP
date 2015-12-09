@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SimpleTCP
 {
+    [Serializable]
     public class TestClass
     {
         public TestClass()
