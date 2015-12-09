@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace SimpleTCP
 {
-    public class Class1
+    public class TestClass
     {
+        public TestClass()
+        {
+            string x = "hello";
+        }
+        
     }
 }
