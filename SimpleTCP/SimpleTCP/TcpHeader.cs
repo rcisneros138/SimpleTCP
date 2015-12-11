@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 
+
 namespace SimpleTCP
 {
    public class TcpHeader
@@ -13,13 +14,14 @@ namespace SimpleTCP
         byte[] DestinationPort;
         byte[] SequencePort;
         byte[] acknowlegementNumber;
-        BitArray dataOffSet;
-        BitArray reserved;
-        bool[] flags;
+        byte[] dataOffSet;
+        byte[] reserved;
+        byte[] flags;
         byte[] window;
         byte[] checkSum;
         byte[] urgentPointer;
         byte[] padding;
+        byte[] finalArray;
 
 
 
@@ -32,9 +34,9 @@ namespace SimpleTCP
             DestinationPort = BitConverter.GetBytes(destinationPort);
             SequencePort = BitConverter.GetBytes(sequencePort);
             acknowlegementNumber = BitConverter.GetBytes(acknowledgeNum);
-            dataOffSet = dataOff; 
-            reserved = Reserved;
-            flags = flag;
+            dataOffSet = Converter.BitToByteArr(dataOff); 
+            reserved = Converter.BitToByteArr(Reserved);
+            flags = Converter.BoolArrTObyteArr(flag);
             window =BitConverter.GetBytes(Window);
             checkSum =BitConverter.GetBytes(CheckSum);
             urgentPointer = BitConverter.GetBytes(Urgent);
@@ -43,24 +45,33 @@ namespace SimpleTCP
 
         }
 
-        public byte[] createBinaryArray
+        public byte[] binaryArray
         {
-            get
-            {
-                return SourcePort;
-            }
+            get {
+                
+                SourcePort.CopyTo(finalArray, 0);
+                DestinationPort.CopyTo(finalArray,SourcePort.Length);
+                SequencePort.CopyTo(finalArray, DestinationPort.Length);
+                acknowlegementNumber.CopyTo(finalArray, SequencePort.Length);
+                dataOffSet.CopyTo(finalArray, acknowlegementNumber.Length);
+                reserved.CopyTo(finalArray,dataOffSet.Length);
+                flags.CopyTo(finalArray, reserved.Length);
+                window.CopyTo(finalArray, flags.Length);
+                checkSum.CopyTo(finalArray, window.Length);
+                urgentPointer.CopyTo(finalArray, checkSum.Length);
+                padding.CopyTo(finalArray, urgentPointer.Length);
+
+                  return finalArray;}
+            
+            
+         
         }
 
         
 
 
 
-        public void ConstructPacket(BitArray toBeConverted)
-        {
-
-            byte[] arr = new byte[toBeConverted.Length];
-            toBeConverted.CopyTo(arr,0);
-        }
+        
 
     }
 }

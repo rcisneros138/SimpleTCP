@@ -8,20 +8,23 @@ using System.Collections;
 namespace SimpleTCP
 {
  
-    class Converter
+    public static class Converter
     {
-        byte[] dataOff;
-        byte[] reserved;
-        byte[] flags;
-
-        public void BoolArrTObyteArr(bool[] boolArray)
+        public static byte[] BoolArrTObyteArr(bool[] boolArray)
         {
-            BitArray bits = new BitArray(boolArray);  
-            flags = new byte[Math.Max(1,bits.Length/8)];
+            BitArray bits = new BitArray(boolArray);
+            byte[] flags = new byte[Math.Max(1, bits.Length / 8)];
             bits.CopyTo(flags, 0);
+            return flags;
 
-            
-       
         }
+
+        public static byte[] BitToByteArr(BitArray bitArray)
+        {
+            byte[] arr = new byte[Math.Max(1, bitArray.Length / 8)];
+            bitArray.CopyTo(arr,0);
+            return arr;
+        }
+        
     }
 }

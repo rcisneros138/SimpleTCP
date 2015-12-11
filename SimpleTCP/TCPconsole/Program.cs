@@ -30,7 +30,7 @@ namespace TCPconsole
 
 
             TcpHeader tcp = new TcpHeader(sourcePort, destinationPort, SequencePort, acknowledgeNumber, dataOff, reserved, flags, window, checksum, urgent, padding);
-            //tcp.getInfo(65535,54434, 4294967295,50000,)
+           
 
             
         }
